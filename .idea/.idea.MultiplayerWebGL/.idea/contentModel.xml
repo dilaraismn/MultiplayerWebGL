@@ -9,6 +9,8 @@
       <e p="Assets" t="Include">
         <e p="_Scripts" t="Include">
           <e p="BasicSpawner.cs" t="Include" />
+          <e p="NetworkInputData.cs" t="Include" />
+          <e p="Player.cs" t="Include" />
         </e>
         <e p="Photon" t="Include">
           <e p="Fusion" t="Include">
