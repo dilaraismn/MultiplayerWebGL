@@ -138,15 +138,13 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
                 StartGame(GameMode.Client);
             }
         }
-        else
+        if (GUI.Button(new Rect(0,90,200,40),"Next Room"))
         {
-            if (GUI.Button(new Rect(0,90,200,40),"Next Room"))
-            {
-                SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                _runner.SetActiveScene(SceneManager.GetActiveScene().buildIndex +1);
-                OnPlayerJoined(NetworkRunner.GetRunnerForScene(SceneManager.GetActiveScene()), new PlayerRef());
-            }
+            //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
+            //_runner.SetActiveScene(SceneManager.GetActiveScene().buildIndex +1);
+            OnPlayerJoined(NetworkRunner.GetRunnerForScene(SceneManager.GetActiveScene()), new PlayerRef());
         }
+        
     }
 }
