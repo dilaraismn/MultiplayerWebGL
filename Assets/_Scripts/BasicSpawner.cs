@@ -65,6 +65,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnConnectedToServer(NetworkRunner runner)
     {
+       
     }
 
     public void OnDisconnectedFromServer(NetworkRunner runner)
@@ -141,8 +142,10 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         {
             if (GUI.Button(new Rect(0,90,200,40),"Next Room"))
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                _runner.SetActiveScene(SceneManager.GetActiveScene().buildIndex +1);
+                OnPlayerJoined(NetworkRunner.GetRunnerForScene(SceneManager.GetActiveScene()), new PlayerRef());
             }
         }
     }
