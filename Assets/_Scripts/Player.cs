@@ -34,7 +34,7 @@ public class Player : NetworkBehaviour
         {
             isWalking = true;
         }
-        else
+        else if (input.HasValue == false)
         {
             isWalking = false;
         }
@@ -45,10 +45,12 @@ public class Player : NetworkBehaviour
         if (isWalking)
         {
             _animator.SetBool("Walk", true);
+            //_animator.SetBool("Idle", false);
         }
         else
         {
             _animator.SetBool("Walk", false);
+            //_animator.SetBool("Idle", true);
         }
     }
 }
