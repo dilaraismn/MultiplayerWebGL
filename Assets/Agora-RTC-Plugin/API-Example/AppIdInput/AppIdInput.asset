@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 310468f085ef24732beac714c9bb64fd, type: 3}
   m_Name: AppIdInput
   m_EditorClassIdentifier: 
-  appID: 
+  appID: 7dfcae4fd5d84f55835a32cb6493de5d
   token: 
   channelName: Unity_Channel
