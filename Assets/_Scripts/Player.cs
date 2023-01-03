@@ -6,14 +6,15 @@ using Fusion;
 
 public class Player : NetworkBehaviour
 {
+    private bool isWalking;
     private NetworkCharacterControllerPrototype _characterControllerPrototype;
     private Animator _animator;
     
     private void Awake()
     {
         _characterControllerPrototype = GetComponent<NetworkCharacterControllerPrototype>();
+        _animator = GetComponentInChildren<Animator>();
     }
-    
     
     public override void FixedUpdateNetwork()
     {
@@ -21,7 +22,33 @@ public class Player : NetworkBehaviour
         {
             data.direction.Normalize();
             _characterControllerPrototype.Move(5 * data.direction * Runner.DeltaTime);
-            _animator.SetBool("IsWalking", true);
+        }
+
+        if (Object.IsProxy == true)
+        {
+            return;
+        }
+
+        var input = GetInput<NetworkInputData>();
+        if (input.HasValue == true)
+        {
+            isWalking = true;
+        }
+        else
+        {
+            isWalking = false;
+        }
+    }
+    
+    public override void Render()
+    {
+        if (isWalking)
+        {
+            _animator.SetBool("Walk", true);
+        }
+        else
+        {
+            _animator.SetBool("Walk", false);
         }
     }
 }
