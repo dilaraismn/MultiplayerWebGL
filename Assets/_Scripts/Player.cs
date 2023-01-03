@@ -6,7 +6,7 @@ using Fusion;
 
 public class Player : NetworkBehaviour
 {
-    private bool isWalking;
+    private bool isWalking, isIdle;
     private NetworkCharacterControllerPrototype _characterControllerPrototype;
     private Animator _animator;
     
@@ -22,21 +22,23 @@ public class Player : NetworkBehaviour
         {
             data.direction.Normalize();
             _characterControllerPrototype.Move(5 * data.direction * Runner.DeltaTime);
-        }
 
-        if (Object.IsProxy == true)
-        {
-            return;
-        }
+            if (Object.IsProxy == true)
+            {
+                return;
+            }
+            
+            if (data.isPressed)
+            {
+                isWalking = true;
+                isIdle = false;
+            }
 
-        var input = GetInput<NetworkInputData>();
-        if (input.HasValue == true)
-        {
-            isWalking = true;
-        }
-        else if (input.HasValue == false)
-        {
-            isWalking = false;
+            if (!data.isPressed)
+            {
+                isWalking = false;
+                isIdle = true;
+            }
         }
     }
     
@@ -45,12 +47,15 @@ public class Player : NetworkBehaviour
         if (isWalking)
         {
             _animator.SetBool("Walk", true);
-            //_animator.SetBool("Idle", false);
+            _animator.SetBool("Idle", false);
+            isIdle = false;
         }
-        else
+
+        if (isIdle)
         {
             _animator.SetBool("Walk", false);
-            //_animator.SetBool("Idle", true);
+            _animator.SetBool("Idle", true);
+            isWalking = false;
         }
     }
 }
