@@ -6,10 +6,12 @@ using Fusion;
 
 public class Player : NetworkBehaviour
 {
-    private bool isWalking, isIdle;
     private NetworkCharacterControllerPrototype _characterControllerPrototype;
     private Animator _animator;
-    
+    [Networked(OnChanged = nameof(OnWalkChanged))]
+    public bool isWalking { get; set; }
+    public bool isIdle { get; set; }
+
     private void Awake()
     {
         _characterControllerPrototype = GetComponent<NetworkCharacterControllerPrototype>();
@@ -41,21 +43,29 @@ public class Player : NetworkBehaviour
             }
         }
     }
-    
-    public override void Render()
+
+    protected static void OnWalkChanged(Changed<Player> changed)
     {
-        if (isWalking)
+        changed.LoadNew();
+        if (changed.Behaviour.isWalking)
         {
-            _animator.SetBool("Walk", true);
-            _animator.SetBool("Idle", false);
-            isIdle = false;
+            changed.Behaviour._animator.SetBool("Walk", true);
+            changed.Behaviour._animator.SetBool("Idle", false);
+            changed.Behaviour.isIdle = false;
+            print("Walking");
         }
 
-        if (isIdle)
+        if (changed.Behaviour.isIdle)
         {
-            _animator.SetBool("Walk", false);
-            _animator.SetBool("Idle", true);
-            isWalking = false;
+            changed.Behaviour._animator.SetBool("Walk", false);
+            changed.Behaviour._animator.SetBool("Idle", true);
+            changed.Behaviour.isWalking = false;
+            print("idle");
         }
+        changed.LoadNew();
+    }
+
+    public override void Render()
+    {
     }
 }

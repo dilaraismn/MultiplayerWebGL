@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 3436307473124119881}
   - component: {fileID: 8345832492681589117}
   - component: {fileID: 5068802815387294373}
+  - component: {fileID: 6153273730951708639}
+  - component: {fileID: 8092035751701534016}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -59,6 +61,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 8345832492681589117}
   - {fileID: 5068802815387294373}
+  - {fileID: 6153273730951708639}
   SimulationBehaviours: []
 --- !u!143 &3436307473124119881
 CharacterController:
@@ -127,6 +130,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+  _isWalking: 0
+--- !u!114 &6153273730951708639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7632433901424406900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  Animator: {fileID: 0}
+  TotalWords: 1
+  SyncSettings: 79
+  FloatAccuracy:
+    _value: 0
+    _inverse: 0
+    _hash: -814817977
+  TimeAccuracy:
+    _value: 0
+    _inverse: 0
+    _hash: 1061325578
+  WeightAccuracy:
+    _value: 0
+    _inverse: 0
+    _hash: -814817977
+  StateHashes: 000000002b1a167c794069556bd5a32d398fdc04
+  TriggerHashes: 00000000
+--- !u!95 &8092035751701534016
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7632433901424406900}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: bdce08aadb342324aaef6de13e31faab, type: 3}
+  m_Controller: {fileID: 9100000, guid: 0190848e18f59ce46b02d8051465c6d7, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &8603012205033866965
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -182,7 +235,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5412995284273461283, guid: 33d06e35c4aca4b47a4a4d53f2624c23, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 33d06e35c4aca4b47a4a4d53f2624c23, type: 3}
 --- !u!4 &7681720780406842508 stripped
 Transform:
