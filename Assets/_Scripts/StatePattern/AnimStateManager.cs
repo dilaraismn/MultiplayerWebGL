@@ -5,10 +5,10 @@ using UnityEngine;
 public class AnimStateManager : MonoBehaviour
 {
     AnimBaseState currentState;
-    private AnimIdleState IdleState = new AnimIdleState();
-    private AnimWalkState WalkState = new AnimWalkState();
-    private AnimJumpState JumpState = new AnimJumpState();
-    private AnimDanceState DanceState = new AnimDanceState();
+    public AnimIdleState IdleState = new AnimIdleState();
+    public AnimWalkState WalkState = new AnimWalkState();
+    public AnimJumpState JumpState = new AnimJumpState();
+    public AnimDanceState DanceState = new AnimDanceState();
     
     void Start()
     {
@@ -18,6 +18,12 @@ public class AnimStateManager : MonoBehaviour
 
     void Update()
     {
-        
+        currentState.UpdateState(this);
+    }
+
+    public void SwitchState(AnimBaseState state)
+    {
+        currentState = state;
+        state.EnterState(this);
     }
 }

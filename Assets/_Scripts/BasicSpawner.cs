@@ -38,22 +38,30 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         if (Input.GetKey(KeyCode.W))
         {
             data.direction += Vector3.forward;
-            data.isPressed = true;
+            data.walkPressed = true;
         }
         if (Input.GetKey(KeyCode.S))
         {
             data.direction += Vector3.back;
-            data.isPressed = true;
+            data.walkPressed = true;
         }
         if (Input.GetKey(KeyCode.A))
         {
             data.direction += Vector3.left;
-            data.isPressed = true;
+            data.walkPressed = true;
         }
         if (Input.GetKey(KeyCode.D))
         {
             data.direction += Vector3.right;
-            data.isPressed = true;
+            data.walkPressed = true;
+        }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            data.jumpPressed = true;
+        }
+        if (Input.GetKey(KeyCode.E))
+        {
+            data.dancePressed = true;
         }
         
         input.Set(data);

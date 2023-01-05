@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 
@@ -30,13 +27,13 @@ public class Player : NetworkBehaviour
                 return;
             }
             
-            if (data.isPressed)
+            if (data.walkPressed)
             {
                 isWalking = true;
                 isIdle = false;
             }
 
-            if (!data.isPressed)
+            if (!data.walkPressed)
             {
                 isWalking = false;
                 isIdle = true;
@@ -63,9 +60,5 @@ public class Player : NetworkBehaviour
             print("idle");
         }
         changed.LoadNew();
-    }
-
-    public override void Render()
-    {
     }
 }
