@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="89f551c2-3c7e-40b2-9c1a-c08852f7c01c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MultiplayerWebGL/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MultiplayerWebGL/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/BasicSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/BasicSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/NetworkInputData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/NetworkInputData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/StatePattern/AnimDanceState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/StatePattern/AnimDanceState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scripts/StatePattern/AnimIdleState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/StatePattern/AnimIdleState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/StatePattern/AnimStateManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/StatePattern/AnimStateManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +21,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/StatePattern/AnimBaseState.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/StatePattern/AnimDanceState.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/BasicSpawner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/30dfda8fa79a431d80262ee17a16696d8ee00/ae/942ff630/Changed`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Player.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/VoiceChatManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -97,6 +95,8 @@
       <workItem from="1672576745470" duration="3926000" />
       <workItem from="1672729106411" duration="10196000" />
       <workItem from="1672898417420" duration="2683000" />
+      <workItem from="1672928817442" duration="1747000" />
+      <workItem from="1672983174792" duration="805000" />
     </task>
     <servers />
   </component>
