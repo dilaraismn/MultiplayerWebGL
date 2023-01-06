@@ -1,5 +1,6 @@
 using UnityEngine;
 using Fusion;
+using Cinemachine;
 
 public class Player : NetworkBehaviour
 {
@@ -26,7 +27,8 @@ public class Player : NetworkBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        // DontDestroyOnLoad(this.gameObject);
+        
         _characterControllerPrototype = GetComponent<NetworkCharacterControllerPrototype>();
         _animator = GetComponentInChildren<Animator>();
 
@@ -40,9 +42,29 @@ public class Player : NetworkBehaviour
         StateMachine.Initialize(IdleState); // Setting player to idle state on Awake.
     }
 
-    public override void FixedUpdateNetwork()
+    public Transform followTransform;
+    public CinemachineVirtualCamera vCam;
+    public override void Spawned()
     {
-        StateMachine.currentState.PhysicsUpdate(); // Calling physicsUptade that we use it like FixedUpdate in States.
+        if (Object.HasInputAuthority == true)
+        {
+            Debug.Log("IS PROXY");
+            vCam.m_Follow = this.followTransform;
+            vCam.m_LookAt = this.followTransform;
+            vCam.Priority--;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            //DontDestroyOnLoad(this.gameObject);
+            vCam.gameObject.SetActive(false);
+        }
+    }
+
+
+     public override void FixedUpdateNetwork()
+    {
+        StateMachine.currentState.PhysicsUpdate(); // Calling physicsUpdate that we use it like FixedUpdate in States.
 
         if (GetInput(out NetworkInputData data))
         {

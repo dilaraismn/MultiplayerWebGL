@@ -12,7 +12,6 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     [SerializeField] private NetworkPrefabRef _playerPrefab;
     public Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
-
     private void Awake()
     {
         Instance = this;
@@ -22,10 +21,10 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         if (runner.IsServer)
         {
             Vector3 spawnPosition = new Vector3((player.RawEncoded%runner.Config.Simulation.DefaultPlayers)* 3,0.5f,0);
-            NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
-
             if (_spawnedCharacters.ContainsKey(player)) return;
 
+            NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
+            
             _spawnedCharacters.Add(player, networkPlayerObject);
         }
     }
@@ -83,7 +82,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             data.dancePressed = true;
             data.danceIndex = 2;
         }
-
+        
         input.Set(data);
     }
 
@@ -160,14 +159,9 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     {
         if (_runner == null)
         {
-            if (GUI.Button(new Rect(0,0,200,40),"Host" ))
+            if (GUI.Button(new Rect(0,0,200,40),"Start" ))
             {
-                StartGame(GameMode.Host);
-            }
-            
-            if (GUI.Button(new Rect(0,40,200,40),"Join" ))
-            {
-                StartGame(GameMode.Client);
+                StartGame(GameMode.AutoHostOrClient);
             }
         }
         if (GUI.Button(new Rect(0,90,200,40),"Next Room"))
@@ -175,7 +169,6 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
             //_runner.SetActiveScene(SceneManager.GetActiveScene().buildIndex +1);
-            OnPlayerJoined(NetworkRunner.GetRunnerForScene(SceneManager.GetActiveScene()), new PlayerRef());
         }
         
     }
