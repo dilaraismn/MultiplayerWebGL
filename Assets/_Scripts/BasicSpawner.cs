@@ -8,15 +8,24 @@ using UnityEngine.SceneManagement;
 
 public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
-    [SerializeField] private NetworkPrefabRef _playerPrefab;
-    private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
+    public static BasicSpawner Instance;
 
+    [SerializeField] private NetworkPrefabRef _playerPrefab;
+    public Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
         if (runner.IsServer)
         {
             Vector3 spawnPosition = new Vector3((player.RawEncoded%runner.Config.Simulation.DefaultPlayers)* 3,0.5f,0);
             NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
+
+            if (_spawnedCharacters.ContainsKey(player)) return;
+
             _spawnedCharacters.Add(player, networkPlayerObject);
         }
     }
@@ -59,11 +68,22 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         {
             data.jumpPressed = true;
         }
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.F1))
         {
             data.dancePressed = true;
+            data.danceIndex = 0;        
         }
-        
+        if (Input.GetKey(KeyCode.F2))
+        {
+            data.dancePressed = true;
+            data.danceIndex = 1;
+        }
+        if (Input.GetKey(KeyCode.F3))
+        {
+            data.dancePressed = true;
+            data.danceIndex = 2;
+        }
+
         input.Set(data);
     }
 

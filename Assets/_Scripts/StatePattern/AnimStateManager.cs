@@ -2,28 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimStateManager : MonoBehaviour
+public class AnimStateManager
 {
-    AnimBaseState currentState;
-    public AnimIdleState IdleState = new AnimIdleState();
-    public AnimWalkState WalkState = new AnimWalkState();
-    public AnimJumpState JumpState = new AnimJumpState();
-    public AnimDanceState DanceState = new AnimDanceState();
-    
-    void Start()
+    public AnimBaseState currentState { get; private set; } // Represents the active state which player in.
+
+    // Holding the given danceIndex when switching state to dance state to determine which animation will play with this index.
+    public int currentDanceIndex { get; set; }
+
+    // Using this on awake function to set starting state to current state.
+    public void Initialize(AnimBaseState startingState)
     {
-        currentState = IdleState;
-        currentState.EnterState(this);
+        currentState = startingState;
+        currentState.Enter();
     }
 
-    void Update()
+    // Using this to switch current state to target state.
+    public void SwitchState(AnimBaseState newState)
     {
-        currentState.UpdateState(this);
+        currentState.Exit();
+        currentState = newState;
+        currentState.Enter();
     }
 
-    public void SwitchState(AnimBaseState state)
+    // Using this to switch current state to dance state. We overriding this method to give extra parameter to check which dance we want to play.
+    public void SwitchState(AnimBaseState newState, int danceIndex)
     {
-        currentState = state;
-        state.EnterState(this);
+        currentState.Exit();
+        currentState = newState;
+        currentDanceIndex = danceIndex;
+        currentState.Enter();
     }
+
 }

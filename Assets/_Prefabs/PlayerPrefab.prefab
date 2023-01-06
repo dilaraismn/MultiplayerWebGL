@@ -15,10 +15,9 @@ GameObject:
   - component: {fileID: 5068802815387294373}
   - component: {fileID: 6153273730951708639}
   - component: {fileID: 8092035751701534016}
-  - component: {fileID: 4457976905537821950}
   m_Layer: 0
   m_Name: PlayerPrefab
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  _isWalking: 0
+  _characterControllerPrototype: {fileID: 8345832492681589117}
 --- !u!114 &6153273730951708639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  Animator: {fileID: 0}
-  TotalWords: 1
+  Animator: {fileID: 8092035751701534016}
+  TotalWords: 2
   SyncSettings: 79
   FloatAccuracy:
     _value: 0
@@ -160,7 +159,7 @@ MonoBehaviour:
     _value: 0
     _inverse: 0
     _hash: -814817977
-  StateHashes: 000000002b1a167c794069556bd5a32d398fdc04
+  StateHashes: 000000002b1a167c794069556bd5a32d398fdc0428a981077af3fe2e6bd28ad9e99dc65c8c6925e91d1418452e463d6181d899e6361aa89ef78380a0958341e22a591c0e
   TriggerHashes: 00000000
 --- !u!95 &8092035751701534016
 Animator:
@@ -181,18 +180,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4457976905537821950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7632433901424406900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fb0494537d59ac4bbc565d58d969a9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8603012205033866965
 PrefabInstance:
   m_ObjectHideFlags: 0

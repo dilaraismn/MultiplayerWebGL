@@ -7,4 +7,5 @@ public struct NetworkInputData : INetworkInput
     public bool walkPressed;
     public bool jumpPressed;
     public bool dancePressed;
+    public int danceIndex;
 }
