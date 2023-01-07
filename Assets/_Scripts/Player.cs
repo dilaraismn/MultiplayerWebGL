@@ -1,6 +1,7 @@
 using UnityEngine;
 using Fusion;
 using Cinemachine;
+using System.Collections;
 
 public class Player : NetworkBehaviour
 {
@@ -22,13 +23,14 @@ public class Player : NetworkBehaviour
     public bool isWalking { get; set; }
     public bool isIdle { get; set; }
     public bool isJumping { get; set; }
+    public bool canJump { get; set; }
     public bool isDancing { get; set; }
 
 
     private void Awake()
     {
         // DontDestroyOnLoad(this.gameObject);
-        
+        this.canJump = true;
         _characterControllerPrototype = GetComponent<NetworkCharacterControllerPrototype>();
         _animator = GetComponentInChildren<Animator>();
 
@@ -89,14 +91,14 @@ public class Player : NetworkBehaviour
             }
 
             // Checks Jump input to switch state
-            if (data.jumpPressed && !StateMachine.currentState.Equals(JumpState))
+            if (data.jumpPressed && !StateMachine.currentState.Equals(JumpState) && canJump)
             {
                 StateMachine.SwitchState(JumpState);
                 _characterControllerPrototype.Jump(); // Apllying Jump function when player is in jumpState.
             }
 
             // Checks Dance inputs to switch state
-            if (data.dancePressed && !StateMachine.currentState.Equals(DanceState))
+            if (data.dancePressed && !StateMachine.currentState.Equals(DanceState) && !isJumping && !isDancing)
             {
                 Debug.Log("danceIndex -> " + data.danceIndex);
                 StateMachine.SwitchState(DanceState , data.danceIndex);
@@ -113,6 +115,13 @@ public class Player : NetworkBehaviour
 
     // To finishing the current state's active animation when it's called. Usally using in animation events.
     private void AnimationFinishTrigger() => StateMachine.currentState.AnimationFinishTrigger();
+
+    //To Controlling jumping animation finished and waiting 0.1 sec to jump again.
+    public IEnumerator CanJumpHandler()
+    {
+        yield return new WaitForSeconds(0.1f);
+        this.canJump = true;
+    }
 
 
     /*
