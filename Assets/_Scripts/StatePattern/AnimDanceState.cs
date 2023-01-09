@@ -15,6 +15,7 @@ public class AnimDanceState : AnimBaseState
         player.isIdle = false;
         player.isWalking = false;
         //player.isDancing = true;
+        player.canDance = false;
         Debug.Log("Dancing");
     }
 
@@ -37,6 +38,8 @@ public class AnimDanceState : AnimBaseState
                 animStateManager.SwitchState(player.MoveState);
             else
                 animStateManager.SwitchState(player.IdleState);
+            
+            player.StartCoroutine(player.CanDanceHandler());
         }
     }
 }

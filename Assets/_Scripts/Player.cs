@@ -24,6 +24,8 @@ public class Player : NetworkBehaviour
     public bool isIdle { get; set; }
     public bool isJumping { get; set; }
     public bool canJump { get; set; }
+    
+    public bool canDance { get; set; }
     public bool isDancing { get; set; }
 
 
@@ -31,6 +33,8 @@ public class Player : NetworkBehaviour
     {
         // DontDestroyOnLoad(this.gameObject);
         this.canJump = true;
+        this.canDance = true;
+        
         _characterControllerPrototype = GetComponent<NetworkCharacterControllerPrototype>();
         _animator = GetComponentInChildren<Animator>();
 
@@ -98,7 +102,7 @@ public class Player : NetworkBehaviour
             }
 
             // Checks Dance inputs to switch state
-            if (data.dancePressed && !StateMachine.currentState.Equals(DanceState) && !isJumping && !isDancing)
+            if (data.dancePressed && !StateMachine.currentState.Equals(DanceState) && !isJumping && !isDancing && canDance)
             {
                 Debug.Log("danceIndex -> " + data.danceIndex);
                 StateMachine.SwitchState(DanceState , data.danceIndex);
@@ -123,6 +127,11 @@ public class Player : NetworkBehaviour
         this.canJump = true;
     }
 
+    public IEnumerator CanDanceHandler()
+    {
+        yield return new WaitForSeconds(.1f);
+        this.canDance = true;
+    }
 
     /*
         protected static void OnWalkChanged(Changed<Player> changed)
