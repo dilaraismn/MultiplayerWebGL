@@ -26,7 +26,6 @@ public class AnimIdleState : AnimBaseState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("idle");
     }
 
     //When player switching from Idle state to another.

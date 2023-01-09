@@ -13,7 +13,6 @@ public class AnimJumpState : AnimBaseState
         base.Enter();
         player.canDance = false;
         player.canJump = false;
-        Debug.Log("Jump");
     }
 
     //When player switching from Jump state to another.
@@ -31,7 +30,6 @@ public class AnimJumpState : AnimBaseState
         // Checking isAnimationFinished to switch state when jumping anim is ended.
         if (isAnimationFinished)
         {
-            //Debug.Log("AAA");
             animStateManager.SwitchState(player.IdleState);
 
             //To Controlling jumping animation finished and waiting 0.1 sec to jump again.

@@ -14,7 +14,6 @@ public class AnimDanceState : AnimBaseState
         player._animator.SetInteger("danceIndex", animStateManager.currentDanceIndex);
         player.canJump = false;
         player.canDance = false;
-        Debug.Log("Dancing");
     }
 
     //When player switching from Jump state to another.

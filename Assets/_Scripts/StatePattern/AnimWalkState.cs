@@ -17,7 +17,6 @@ public class AnimWalkState : AnimBaseState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Walking");
     }
 
     //When player switching from Walk state to another.

@@ -20,13 +20,11 @@ public class Player : NetworkBehaviour
 
     public Animator _animator { get; private set; }
     //[Networked(OnChanged = nameof(OnWalkChanged))]
-    //public bool isWalking { get; set; }
-    //public bool isIdle { get; set; }
-    public bool isJumping { get; set; }
     public bool canJump { get; set; }
     
     public bool canDance { get; set; }
-    public bool isDancing { get; set; }
+   
+    private TickTimer _despawnTimer;
 
 
     private void Awake()
@@ -48,21 +46,17 @@ public class Player : NetworkBehaviour
         StateMachine.Initialize(IdleState); // Setting player to idle state on Awake.
     }
 
-    public Transform followTransform;
     public CinemachineVirtualCamera vCam;
     public override void Spawned()
     {
         if (Object.HasStateAuthority == true)
         {
-            Debug.Log("IS PROXY");
-            vCam.m_Follow = this.followTransform;
-            vCam.m_LookAt = this.followTransform;
+            Debug.Log("Object Has State Authority");
             vCam.Priority--;
             DontDestroyOnLoad(this.gameObject);
         }
         else
         {
-            //DontDestroyOnLoad(this.gameObject);
             vCam.gameObject.SetActive(false);
         }
     }
@@ -70,6 +64,12 @@ public class Player : NetworkBehaviour
 
      public override void FixedUpdateNetwork()
     {
+        if (BasicSpawner.isPlayerLeft && Object.HasStateAuthority)
+        {
+            Debug.Log("Despawn");
+            Runner.Despawn(Object); 
+        }
+        
         StateMachine.currentState.PhysicsUpdate(); // Calling physicsUpdate that we use it like FixedUpdate in States.
 
         if (GetInput(out NetworkInputData data))
@@ -77,11 +77,8 @@ public class Player : NetworkBehaviour
             data.direction.Normalize();
             _characterControllerPrototype.Move(5 * data.direction * Runner.DeltaTime);
 
-            if (Object.IsProxy == true)
-            {
-                return;
-            }
-
+            if (Object.IsProxy == true) return;
+            
             // Checks Walk input to switch state to MoveState
             if (data.walkPressed && StateMachine.currentState.Equals(IdleState))
             {
@@ -136,6 +133,7 @@ public class Player : NetworkBehaviour
         this.canJump = true;
     }
 
+    #region Old Anim Code
     /*
         protected static void OnWalkChanged(Changed<Player> changed)
         {
@@ -158,4 +156,6 @@ public class Player : NetworkBehaviour
             changed.LoadNew();
         }
     */
+    #endregion
+    
 }
