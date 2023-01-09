@@ -20,8 +20,8 @@ public class Player : NetworkBehaviour
 
     public Animator _animator { get; private set; }
     //[Networked(OnChanged = nameof(OnWalkChanged))]
-    public bool isWalking { get; set; }
-    public bool isIdle { get; set; }
+    //public bool isWalking { get; set; }
+    //public bool isIdle { get; set; }
     public bool isJumping { get; set; }
     public bool canJump { get; set; }
     
@@ -52,7 +52,7 @@ public class Player : NetworkBehaviour
     public CinemachineVirtualCamera vCam;
     public override void Spawned()
     {
-        if (Object.HasInputAuthority == true)
+        if (Object.HasStateAuthority == true)
         {
             Debug.Log("IS PROXY");
             vCam.m_Follow = this.followTransform;
@@ -102,16 +102,16 @@ public class Player : NetworkBehaviour
             }
 
             // Checks Dance inputs to switch state
-            if (data.dancePressed && !StateMachine.currentState.Equals(DanceState) && !isJumping && !isDancing && canDance)
+            if (data.dancePressed && !StateMachine.currentState.Equals(DanceState) && canDance)
             {
                 Debug.Log("danceIndex -> " + data.danceIndex);
                 StateMachine.SwitchState(DanceState , data.danceIndex);
             }
 
             // Checks movement and jumping inputs to switch state when the player is dancing.
-            if (StateMachine.currentState.Equals(DanceState) && (data.walkPressed || data.jumpPressed))
+            if (StateMachine.currentState.Equals(DanceState) && (data.walkPressed /*|| data.jumpPressed*/))
             {
-                StateMachine.currentState.isAnimationFinished = true; // Finishes the playing animation. 
+                StateMachine.currentState.isAnimationFinished = true; // Finishes the playing animation.
             }
 
         }
@@ -125,12 +125,15 @@ public class Player : NetworkBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         this.canJump = true;
+        this.canDance = true;
+
     }
 
     public IEnumerator CanDanceHandler()
     {
         yield return new WaitForSeconds(.1f);
         this.canDance = true;
+        this.canJump = true;
     }
 
     /*

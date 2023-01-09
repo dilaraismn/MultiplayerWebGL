@@ -11,9 +11,7 @@ public class AnimJumpState : AnimBaseState
     public override void Enter()
     {
         base.Enter();
-        player.isWalking = false;
-        player.isIdle = false;
-        //player.isJumping = true;
+        player.canDance = false;
         player.canJump = false;
         Debug.Log("Jump");
     }
@@ -22,8 +20,7 @@ public class AnimJumpState : AnimBaseState
     public override void Exit()
     {
         base.Exit();
-        //player.isJumping = false;
-
+        player.StartCoroutine(player.CanJumpHandler());
     }
 
     // Filling this with what you want to add something to FixedUpdate method.

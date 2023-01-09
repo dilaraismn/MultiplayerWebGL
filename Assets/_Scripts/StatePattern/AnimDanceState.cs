@@ -12,9 +12,7 @@ public class AnimDanceState : AnimBaseState
     {
         base.Enter();
         player._animator.SetInteger("danceIndex", animStateManager.currentDanceIndex);
-        player.isIdle = false;
-        player.isWalking = false;
-        //player.isDancing = true;
+        player.canJump = false;
         player.canDance = false;
         Debug.Log("Dancing");
     }
@@ -23,8 +21,7 @@ public class AnimDanceState : AnimBaseState
     public override void Exit()
     {
         base.Exit();
-        //player.isDancing = false;
-
+        player.StartCoroutine(player.CanDanceHandler());
     }
 
     public override void PhysicsUpdate()
@@ -34,10 +31,7 @@ public class AnimDanceState : AnimBaseState
         // Checking isAnimationFinished to switch state when dancing anim is ended.
         if (isAnimationFinished)
         {
-            if (player.isWalking)
-                animStateManager.SwitchState(player.MoveState);
-            else
-                animStateManager.SwitchState(player.IdleState);
+            animStateManager.SwitchState(player.IdleState);
             
             player.StartCoroutine(player.CanDanceHandler());
         }

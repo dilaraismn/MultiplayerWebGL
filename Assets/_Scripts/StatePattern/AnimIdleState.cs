@@ -26,8 +26,6 @@ public class AnimIdleState : AnimBaseState
     public override void Enter()
     {
         base.Enter();
-        player.isWalking = false;
-        player.isIdle = true;
         Debug.Log("idle");
     }
 

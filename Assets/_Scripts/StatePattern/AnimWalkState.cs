@@ -17,8 +17,6 @@ public class AnimWalkState : AnimBaseState
     public override void Enter()
     {
         base.Enter();
-        player.isIdle = false;
-        player.isWalking = true;
         Debug.Log("Walking");
     }
 

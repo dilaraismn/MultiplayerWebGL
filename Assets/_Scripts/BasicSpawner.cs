@@ -5,6 +5,7 @@ using UnityEngine;
 using Fusion;
 using Fusion.Sockets;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
@@ -12,21 +13,27 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 
     [SerializeField] private NetworkPrefabRef _playerPrefab;
     public Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
+
+    NetworkObject LocalView;
     private void Awake()
     {
         Instance = this;
     }
+
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        if (runner.IsServer)
-        {
-            Vector3 spawnPosition = new Vector3((player.RawEncoded%runner.Config.Simulation.DefaultPlayers)* 3,0.5f,0);
-            if (_spawnedCharacters.ContainsKey(player)) return;
+        //if (runner.IsServer)
+        //{
+        Vector3 spawnPosition = new Vector3((player.RawEncoded % runner.Config.Simulation.DefaultPlayers) * 3, 0.5f, 0);
+        if (_spawnedCharacters.ContainsKey(player) || LocalView != null) return;
 
-            NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
-            
-            _spawnedCharacters.Add(player, networkPlayerObject);
-        }
+        LocalView = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
+        LocalView.name = Random.Range(0, 100).ToString();
+
+        Debug.Log(LocalView.gameObject.name);
+
+        _spawnedCharacters.Add(player, LocalView);
+        //}
     }
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
@@ -161,7 +168,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         {
             if (GUI.Button(new Rect(0,0,200,40),"Start" ))
             {
-                StartGame(GameMode.AutoHostOrClient);
+                StartGame(GameMode.Shared);
             }
         }
         if (GUI.Button(new Rect(0,90,200,40),"Next Room"))
