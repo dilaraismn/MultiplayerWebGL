@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using Fusion.Sockets;
+using MultiplayerWebGL;
 using UnityEngine.SceneManagement;
 using Object = System.Object;
 using Random = UnityEngine.Random;
@@ -160,7 +161,21 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         );
     }
 
-    private void OnGUI()
+
+    public void StartGameButton()
+    {
+        if (_runner == null)
+        {
+            StartGame(GameMode.Shared);
+        }
+    }
+
+    public void NextSceneButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
+    }
+   
+    /*private void OnGUI()
     {
         if (_runner == null)
         {
@@ -174,7 +189,6 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
             //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
             //_runner.SetActiveScene(SceneManager.GetActiveScene().buildIndex +1);
-        }
-        
-    }
+        } 
+    }*/
 }

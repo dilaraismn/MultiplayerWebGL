@@ -71,7 +71,7 @@ namespace Agora_RTC_Plugin.API_Example.Examples.Basic.JoinChannelAudio
         private void InitRtcEngine()
         {
             RtcEngine = Agora.Rtc.RtcEngine.CreateAgoraRtcEngine();
-            UserEventHandler handler = new UserEventHandler(this);
+            RtcEngineEventHandler handler = new RtcEngineEventHandler(this);
             RtcEngineContext context = new RtcEngineContext(_appID, 0,
                                         CHANNEL_PROFILE_TYPE.CHANNEL_PROFILE_LIVE_BROADCASTING,
                                         AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_DEFAULT);
@@ -168,11 +168,11 @@ namespace Agora_RTC_Plugin.API_Example.Examples.Basic.JoinChannelAudio
 
     #region -- Agora Event ---
 
-    internal class UserEventHandler : IRtcEngineEventHandler
+    internal class RtcEngineEventHandler : IRtcEngineEventHandler
     {
         private readonly JoinChannelAudio _audioSample;
 
-        internal UserEventHandler(JoinChannelAudio audioSample)
+        internal RtcEngineEventHandler(JoinChannelAudio audioSample)
         {
             _audioSample = audioSample;
         }
