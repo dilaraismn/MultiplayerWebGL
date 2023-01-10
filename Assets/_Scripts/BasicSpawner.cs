@@ -15,9 +15,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     [SerializeField] private NetworkPrefabRef _playerPrefab;
     public Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
     NetworkObject LocalView;
-
-    public static bool isPlayerLeft;
-
+    
     private void Awake()
     {
         Instance = this;
@@ -38,10 +36,8 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
         Debug.Log("Player Left");
-        //runner.Despawn(Playe);
-        isPlayerLeft = true;
-        _spawnedCharacters.Remove(player);
     }
+
 
     #region Inputs
     public void OnInput(NetworkRunner runner, NetworkInput input)

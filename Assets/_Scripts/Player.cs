@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 using Fusion;
 using Cinemachine;
 using System.Collections;
 
-public class Player : NetworkBehaviour
+public class Player : NetworkBehaviour, IDespawned
 {
     public AnimStateManager StateMachine { get; private set; }
 
@@ -23,9 +24,6 @@ public class Player : NetworkBehaviour
     public bool canJump { get; set; }
     
     public bool canDance { get; set; }
-   
-    private TickTimer _despawnTimer;
-
 
     private void Awake()
     {
@@ -51,7 +49,6 @@ public class Player : NetworkBehaviour
     {
         if (Object.HasStateAuthority == true)
         {
-            Debug.Log("Object Has State Authority");
             vCam.Priority--;
             DontDestroyOnLoad(this.gameObject);
         }
@@ -61,15 +58,9 @@ public class Player : NetworkBehaviour
         }
     }
 
-
-     public override void FixedUpdateNetwork()
+    
+    public override void FixedUpdateNetwork()
     {
-        if (BasicSpawner.isPlayerLeft && Object.HasStateAuthority)
-        {
-            Debug.Log("Despawn");
-            Runner.Despawn(Object); 
-        }
-        
         StateMachine.currentState.PhysicsUpdate(); // Calling physicsUpdate that we use it like FixedUpdate in States.
 
         if (GetInput(out NetworkInputData data))
