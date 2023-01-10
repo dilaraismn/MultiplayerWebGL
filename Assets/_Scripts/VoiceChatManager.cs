@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 using Agora.Rtc;
 using Agora.Util;
 using Agora_RTC_Plugin.API_Example.Examples.Basic.JoinChannelAudio;
+using Fusion;
 using Logger = Agora.Util.Logger;
 
 namespace MultiplayerWebGL
@@ -75,7 +76,10 @@ namespace MultiplayerWebGL
         
         public void JoinChannel()
         {
-            RtcEngine.JoinChannel(_token, _channelName);
+            NetworkRunner networkRunner = FindObjectOfType<NetworkRunner>();
+            string sessionName = networkRunner.SessionInfo.Name;
+            RtcEngine.JoinChannel(_token, sessionName);
+            Log.UpdateLog("Joined To This Session: " + sessionName);
         }
 
         public void LeaveChannel()

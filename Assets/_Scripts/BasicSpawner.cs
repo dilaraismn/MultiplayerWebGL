@@ -174,7 +174,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
     }
-   
+    
     /*private void OnGUI()
     {
         if (_runner == null)

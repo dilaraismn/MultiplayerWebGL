@@ -58,7 +58,6 @@ public class Player : NetworkBehaviour, IDespawned
         }
     }
 
-    
     public override void FixedUpdateNetwork()
     {
         StateMachine.currentState.PhysicsUpdate(); // Calling physicsUpdate that we use it like FixedUpdate in States.
