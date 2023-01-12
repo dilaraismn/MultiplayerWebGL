@@ -13,6 +13,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
 {
     public static BasicSpawner Instance;
 
+    [SerializeField] private GameObject startGameButton;
     [SerializeField] private NetworkPrefabRef _playerPrefab;
     public Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
     NetworkObject LocalView;
@@ -32,11 +33,14 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         LocalView = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
         LocalView.name = Random.Range(0, 100).ToString();
         _spawnedCharacters.Add(player, LocalView);
+        
+        VoiceChatManager.Instance.RtcEngine.JoinChannel(VoiceChatManager.Instance._token,
+            SceneManager.GetActiveScene().name);
     }
     
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
-        Debug.Log("Player Left");
+        VoiceChatManager.Instance.RtcEngine.LeaveChannel();
     }
 
 
@@ -167,6 +171,7 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         if (_runner == null)
         {
             StartGame(GameMode.Shared);
+            startGameButton.SetActive(false);
         }
     }
 

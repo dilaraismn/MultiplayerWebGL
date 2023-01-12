@@ -15,7 +15,7 @@ namespace MultiplayerWebGL
     {
         [SerializeField] private AppIdInput _appIdInput;
         private string _appID = "";
-        private string _token = "";
+        public string _token = "";
         private string _channelName = "";
 
         public Text LogText;
@@ -26,7 +26,13 @@ namespace MultiplayerWebGL
         private DeviceInfo[] _audioPlaybackDeviceInfos;
         public Dropdown _audioDeviceSelect;
 
-        // Start is called before the first frame update
+        public static VoiceChatManager Instance;
+        
+        private void Awake()
+        {
+            Instance = this;
+        }
+        
         private void Start()
         {
             LoadAssetData();
@@ -53,16 +59,19 @@ namespace MultiplayerWebGL
         {
             if (_appIdInput == null) return;
             _appID = _appIdInput.appID;
+            _token = _appIdInput.token;
             _channelName = _appIdInput.channelName;
         }
 
         private void InitRtcEngine()
         {
             RtcEngine = Agora.Rtc.RtcEngine.CreateAgoraRtcEngine();
+            RtcEngineEventHandler handler = new RtcEngineEventHandler(this);
             RtcEngineContext context = new RtcEngineContext(_appID, 0,
-                                        CHANNEL_PROFILE_TYPE.CHANNEL_PROFILE_LIVE_BROADCASTING,
-                                        AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_DEFAULT);
+                CHANNEL_PROFILE_TYPE.CHANNEL_PROFILE_LIVE_BROADCASTING,
+                AUDIO_SCENARIO_TYPE.AUDIO_SCENARIO_DEFAULT);
             RtcEngine.Initialize(context);
+            RtcEngine.InitEventHandler(handler);
         }
 
         private void SetBasicConfiguration()
@@ -73,13 +82,14 @@ namespace MultiplayerWebGL
         }
 
         #region -- Button Events ---
-        
         public void JoinChannel()
         {
-            NetworkRunner networkRunner = FindObjectOfType<NetworkRunner>();
-            string sessionName = networkRunner.SessionInfo.Name;
-            RtcEngine.JoinChannel(_token, sessionName);
-            Log.UpdateLog("Joined To This Session: " + sessionName);
+            //NetworkRunner networkRunner = FindObjectOfType<NetworkRunner>();
+            //string sessionName = networkRunner.SessionInfo.Name;
+            //_channelName = sessionName;
+            RtcEngine.JoinChannel(_token, _channelName);
+            Debug.Log("Agora Joined To Channel");
+            //GetAudioPlaybackDevice();
         }
 
         public void LeaveChannel()
@@ -92,7 +102,7 @@ namespace MultiplayerWebGL
             var options = new ChannelMediaOptions();
             options.publishMicrophoneTrack.SetValue(false);
             var nRet =  RtcEngine.UpdateChannelMediaOptions(options);
-            this.Log.UpdateLog("UpdateChannelMediaOptions: " + nRet);
+            Debug.Log("Not Publishing Audio");
         }
 
         public void StartPublishAudio()
@@ -100,7 +110,7 @@ namespace MultiplayerWebGL
             var options = new ChannelMediaOptions();
             options.publishMicrophoneTrack.SetValue(true);
             var nRet = RtcEngine.UpdateChannelMediaOptions(options);
-            this.Log.UpdateLog("UpdateChannelMediaOptions: " + nRet);
+            Debug.Log("Publishing Audio");
         }
 
         public void GetAudioPlaybackDevice()
@@ -136,11 +146,52 @@ namespace MultiplayerWebGL
 
         private void OnDestroy()
         {
-            Debug.Log("OnDestroy");
             if (RtcEngine == null) return;
             RtcEngine.InitEventHandler(null);
             RtcEngine.LeaveChannel();
             RtcEngine.Dispose();
+        }
+    }
+
+    internal class RtcEngineEventHandler : IRtcEngineEventHandler
+    {
+        private readonly VoiceChatManager _audioSample;
+
+        internal RtcEngineEventHandler(VoiceChatManager audioSample)
+        {
+            _audioSample = audioSample;
+        }
+        public override void OnError(int error, string message)
+        {
+            _audioSample.Log.UpdateLog(string.Format("OnError err: {0}, msg: {1}", error, message));
+        }
+
+        public override void OnJoinChannelSuccess(RtcConnection connection, int elapsed)
+        {
+            int build = 0;
+            _audioSample.Log.UpdateLog(string.Format("sdk version: ${0}",
+                _audioSample.RtcEngine.GetVersion(ref build)));
+            _audioSample.Log.UpdateLog(
+                string.Format("OnJoinChannelSuccess channelName: {0}, uid: {1}, elapsed: {2}",
+                    connection.channelId, connection.localUid, elapsed));
+        }
+
+        public override void OnLeaveChannel(RtcConnection connection, RtcStats stats)
+        {
+            _audioSample.Log.UpdateLog("OnLeaveChannel");
+        }
+        public override void OnClientRoleChanged(RtcConnection connection, CLIENT_ROLE_TYPE oldRole, CLIENT_ROLE_TYPE newRole)
+        {
+            _audioSample.Log.UpdateLog("OnClientRoleChanged");
+        }
+        public override void OnUserJoined(RtcConnection connection, uint uid, int elapsed)
+        {
+            _audioSample.Log.UpdateLog(string.Format("OnUserJoined uid: ${0} elapsed: ${1}", uid, elapsed));
+        }
+        public override void OnUserOffline(RtcConnection connection, uint uid, USER_OFFLINE_REASON_TYPE reason)
+        {
+            _audioSample.Log.UpdateLog(string.Format("OnUserOffLine uid: ${0}, reason: ${1}", uid,
+                (int)reason));
         }
     }
 }

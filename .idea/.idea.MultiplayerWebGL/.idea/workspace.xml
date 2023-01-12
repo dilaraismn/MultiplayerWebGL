@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="89f551c2-3c7e-40b2-9c1a-c08852f7c01c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MultiplayerWebGL/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MultiplayerWebGL/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Agora-RTC-Plugin/API-Example/AppIdInput/AppIdInput.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Agora-RTC-Plugin/API-Example/AppIdInput/AppIdInput.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Agora-RTC-Plugin/API-Example/examples/Basic/JoinChannelAudio/JoinChannelAudio.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Agora-RTC-Plugin/API-Example/examples/Basic/JoinChannelAudio/JoinChannelAudio.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scripts/BasicSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/BasicSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Player.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scripts/VoiceChatManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/VoiceChatManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +35,6 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/30dfda8fa79a431d80262ee17a16696d8ee00/ae/942ff630/Changed`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/af218701fe324032b521ddd91f13662b13b600/bb/0c9b1c5e/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/Player.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/Downloads/Fusion-Asteroids-Shared-Simple-1.1.3/Assets/Asteroids-Shared-Simple/Spaceship/SpaceshipSpawner.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/VoiceChatManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -110,6 +111,7 @@
       <workItem from="1673245308829" duration="20326000" />
       <workItem from="1673331735509" duration="257000" />
       <workItem from="1673332071175" duration="9859000" />
+      <workItem from="1673505608389" duration="5480000" />
     </task>
     <servers />
   </component>
