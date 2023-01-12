@@ -1,5 +1,4 @@
 using Fusion;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class AnimWalkState : AnimBaseState
