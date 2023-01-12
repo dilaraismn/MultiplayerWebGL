@@ -6,7 +6,7 @@ using Agora.Rtc;
 using Agora.Util;
 using Logger = Agora.Util.Logger;
 
-namespace Agora_RTC_Plugin.API_Example.Examples.Advanced.SpatialAudioWithMediaPlayer
+/*namespace Agora_RTC_Plugin.API_Example.Examples.Advanced.SpatialAudioWithMediaPlayer
 {
     public class SpatialAudioWithMediaPlayer : MonoBehaviour
     {
@@ -391,4 +391,4 @@ namespace Agora_RTC_Plugin.API_Example.Examples.Advanced.SpatialAudioWithMediaPl
     }
 
     #endregion
-}
+}*/
