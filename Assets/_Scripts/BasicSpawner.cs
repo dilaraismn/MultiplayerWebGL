@@ -32,6 +32,8 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         LocalView.name = Random.Range(0, 100).ToString();
         _spawnedCharacters.Add(player, LocalView);
         VoiceChatManager.Instance.JoinRoom();
+        VoiceChatManager.Instance.rtcEngine.JoinChannel(VoiceChatManager.Instance.token,
+            SceneManager.GetActiveScene().name);
     }
     
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
