@@ -218,7 +218,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 702426045}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MultiplayerWebGL.VoiceChatManager, Assembly-CSharp
         m_MethodName: JoinChannel
         m_Mode: 1
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 702426045}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MultiplayerWebGL.VoiceChatManager, Assembly-CSharp
         m_MethodName: StartPublishAudio
         m_Mode: 1
@@ -430,10 +430,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5b2de5678b23d48871ce03b95ec427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _appIdInput: {fileID: 11400000, guid: 300c6525f002a4dbaac41a5c4b054e35, type: 2}
-  _token: 
-  LogText: {fileID: 802313759}
-  _audioDeviceSelect: {fileID: 0}
 --- !u!4 &702426046
 Transform:
   m_ObjectHideFlags: 0
@@ -636,7 +632,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 702426045}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MultiplayerWebGL.VoiceChatManager, Assembly-CSharp
         m_MethodName: LeaveChannel
         m_Mode: 1
@@ -703,7 +699,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &802313758
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1032,7 +1028,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 702426045}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MultiplayerWebGL.VoiceChatManager, Assembly-CSharp
         m_MethodName: StopPublishAudio
         m_Mode: 1

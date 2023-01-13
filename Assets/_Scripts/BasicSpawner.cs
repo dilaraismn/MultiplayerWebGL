@@ -1,12 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using Fusion.Sockets;
 using MultiplayerWebGL;
 using UnityEngine.SceneManagement;
-using Object = System.Object;
 using Random = UnityEngine.Random;
 
 public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
@@ -33,14 +31,12 @@ public class BasicSpawner : MonoBehaviour, INetworkRunnerCallbacks
         LocalView = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
         LocalView.name = Random.Range(0, 100).ToString();
         _spawnedCharacters.Add(player, LocalView);
-        
-        VoiceChatManager.Instance.RtcEngine.JoinChannel(VoiceChatManager.Instance._token,
-            SceneManager.GetActiveScene().name);
+        VoiceChatManager.Instance.JoinRoom();
     }
     
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
-        VoiceChatManager.Instance.RtcEngine.LeaveChannel();
+        VoiceChatManager.Instance.LeaveRoom();
     }
 
 
