@@ -1,20 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine.SceneManagement;
 using UnityEngine;
 using agora_gaming_rtc;
-using agora_utilities;
-using Fusion;
 using UnityEngine.Android;
-using UnityEngine.UI;
 
 namespace MultiplayerWebGL
 {
     public class VoiceChatManager : MonoBehaviour
     {
-        private string appID = "7dfcae4fd5d84f55835a32cb6493de5d";
+        private string appID = "b4bb63f84ac64b34913d70e5034fb4d3";
         public IRtcEngine rtcEngine;
         public string token, channel;
         public static VoiceChatManager Instance;
@@ -65,10 +57,11 @@ namespace MultiplayerWebGL
         public void JoinRoom()
         {
             if (rtcEngine == null) return;
-
             //NetworkRunner networkRunner = FindObjectOfType<NetworkRunner>();
             //string channel = networkRunner.SessionInfo.Name;
             rtcEngine.JoinChannel(token, channel);
+            rtcEngine.EnableAudio();
+            //rtcEngine.JoinChannelByKey(token, channel);
             Debug.Log("Agora Joined To Channel");
         }
         
@@ -82,7 +75,7 @@ namespace MultiplayerWebGL
         {
             var options = new ChannelMediaOptions();
             options.publishLocalAudio = true;
-            options.autoSubscribeAudio = true;
+            //options.autoSubscribeAudio = true;
             Debug.Log("Publishing Audio");
         }
 
@@ -90,7 +83,7 @@ namespace MultiplayerWebGL
         {
             var options = new ChannelMediaOptions();
             options.publishLocalAudio = false;
-            options.autoSubscribeAudio = false;
+            //options.autoSubscribeAudio = false;
             Debug.Log("Not Publishing Audio");
         }
         
@@ -123,8 +116,22 @@ namespace MultiplayerWebGL
         #endregion
     }
 
-    internal class RtcEngineEventHandler : IRtcEngineEventHandler
+    internal class RtcEngineEventHandler : AgoraWebGLEventHandler
     {
-        
+        private readonly VoiceChatManager _audioSample;
+
+        internal RtcEngineEventHandler(VoiceChatManager audioSample)
+        {
+            _audioSample = audioSample;
+        }
+        public void OnJoinChannelSuccess(IRtcEngine connection, int elapsed)
+        {
+            Debug.Log("OnJoinChannelSuccess");
+        }
+
+        public void OnLeaveChannel(IRtcEngine connection, RtcStats stats)
+        {
+            Debug.Log("OnJoinLeavelSuccess");
+        }
     }
 }

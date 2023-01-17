@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89f551c2-3c7e-40b2-9c1a-c08852f7c01c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MultiplayerWebGL/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MultiplayerWebGL/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Agora_Unity_SDK_FULL/samples/Hello-Video-Unity-Agora/Assets/AgoraEngine/Scripts/AgoraGamingSDK/AgoraBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Agora_Unity_SDK_FULL/samples/Hello-Video-Unity-Agora/Assets/AgoraEngine/Scripts/AgoraGamingSDK/AgoraBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/BasicSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/BasicSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/VoiceChatManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/VoiceChatManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Agora_Unity_SDK_FULL/samples/Hello-Video-Unity-Agora/Assets/AgoraEngine/Plugins.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Agora_Unity_SDK_FULL/samples/Hello-Video-Unity-Agora/Assets/AgoraEngine/Plugins.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.connect.share/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.connect.share/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +29,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/StatePattern/AnimBaseState.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Scripts/StatePattern/AnimDanceState.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_Scripts/OldVoice.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/API-Example/DeviceManager/AgoraDeviceManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/30dfda8fa79a431d80262ee17a16696d8ee00/ae/942ff630/Changed`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/af218701fe324032b521ddd91f13662b13b600/bb/0c9b1c5e/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Agora_Unity_SDK_FULL/samples/Hello-Video-Unity-Agora/Assets/AgoraEngine/Scripts/AgoraGamingSDK/AgoraGamingRtcEngine.cs" root0="SKIP_HIGHLIGHTING" />
@@ -118,6 +117,7 @@
       <workItem from="1673332071175" duration="9859000" />
       <workItem from="1673505608389" duration="5480000" />
       <workItem from="1673592306371" duration="3821000" />
+      <workItem from="1673936499674" duration="8869000" />
     </task>
     <servers />
   </component>
